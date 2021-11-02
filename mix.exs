@@ -10,7 +10,11 @@ defmodule Rush.MixProject do
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: [
+        plt_add_apps: [:ex_unit],
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
+      ]
     ]
   end
 
@@ -66,8 +70,15 @@ defmodule Rush.MixProject do
       setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test --trace --color", "credo"],
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test --trace --color", "credo --strict", "dialyzer"],
       "assets.deploy": ["esbuild default --minify", "phx.digest"]
+    ]
+  end
+
+  defp dialyzer do
+    [
+      plt_add_apps: [:ex_unit],
+      plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
     ]
   end
 end
