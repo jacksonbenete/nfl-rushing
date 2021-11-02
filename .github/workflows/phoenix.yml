@@ -28,13 +28,9 @@ jobs:
             priv/plts
       - name: Install Phoenix and lint dependencies
         run: |
-          mix deps.get
-          mix deps.compile
           mix dialyzer --plt
-      - name: Run Credo
-        run: mix credo --strict
-      - name: Run Dialyzer
-        run: mix dialyzer
+      - name: Run Credo and Dialyzer
+        run: mix lint
   test:
     name: Phoenix testing with ExUnit
     runs-on: ubuntu-latest
