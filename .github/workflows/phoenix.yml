@@ -28,6 +28,7 @@ jobs:
             priv/plts
       - name: Install Phoenix and lint dependencies
         run: |
+          mix deps.get
           mix dialyzer --plt
       - name: Run Credo and Dialyzer
         run: mix lint
