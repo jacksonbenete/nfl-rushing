@@ -10,7 +10,7 @@ defmodule RushWeb.Controllers.Json do
     |> json_to_map
   end
 
-  defp json_to_map(data) do
+  def json_to_map(data) do
     Jason.decode!(data)
   end
 end
