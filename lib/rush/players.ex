@@ -4,9 +4,9 @@ defmodule Rush.Players do
   Use Cases interacts with domains.
   """
 
-  alias Rush.Repo
   alias Ecto.Multi
   alias Rush.Players.Player
+  alias Rush.Repo
   alias Rush.Statistics.PlayerStatistic
 
   def persist_player(player) do

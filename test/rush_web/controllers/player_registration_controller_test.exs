@@ -1,8 +1,9 @@
 defmodule RushWeb.PlayerRegistrationControllerTest do
   use ExUnit.Case, async: true
 
-  alias RushWeb.PlayerRegistrationController
+  alias Ecto.Adapters.SQL.Sandbox
   alias RushWeb.Controllers.Json
+  alias RushWeb.PlayerRegistrationController
 
   describe "map_to_player/1" do
     test "map_to_player/1 when receiving a valid map returns a valid player" do
@@ -78,7 +79,7 @@ defmodule RushWeb.PlayerRegistrationControllerTest do
   describe "insert_player/1" do
 
     setup do
-      :ok = Ecto.Adapters.SQL.Sandbox.checkout(Rush.Repo)
+      :ok = Sandbox.checkout(Rush.Repo)
     end
 
     test "insert_player/1 when receive a valid player map will persist on database" do
@@ -149,7 +150,7 @@ defmodule RushWeb.PlayerRegistrationControllerTest do
       result = changeset.valid?
 
       # Assert
-      refute = result
+      refute result
     end
 
     test "insert_player/1 when receive an invalid contract map fail to persist" do
