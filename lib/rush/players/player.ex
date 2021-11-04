@@ -33,24 +33,4 @@ defmodule Rush.Players.Player do
     |> cast(attrs, [:name, :team, :position])
     |> validate_required([:name, :team, :position])
   end
-
-  def get_contract_json_to_player do
-    %{
-      "Player" => "name",
-      "Team" => "team",
-      "Pos" => "position",
-      "Att" => "attempts",
-      "Att/G" => "attempts_per_game",
-      "Yds" => "total_yards",
-      "Avg" => "average_yards_per_attempt",
-      "Yds/G" => "yards_per_game",
-      "TD" => "total_touchdowns",
-      "Lng" => "longest_rush",
-      "1st" => "total_first_downs",
-      "1st%" => "first_downs_percentage",
-      "20+" => "rush_20_plus",
-      "40+" => "rush_40_plus",
-      "FUM" => "fumbles"
-    }
-  end
 end

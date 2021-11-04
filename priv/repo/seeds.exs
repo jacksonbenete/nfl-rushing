@@ -1,17 +1,8 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Rush.Repo.insert!(%Rush.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
-
-data = RushWeb.Controllers.Json.import_json_file("priv/repo/rushing.json")
+# It could instead run inside an Ecto.Multi transaction, so if any data
+# fail passes on anti-corruption layer, you may want to rollback and reject all
+# insertions.
+data = Rush.Json.import_json_file("priv/repo/rushing.json")
 Enum.map(data, fn entry ->
-  RushWeb.PlayerRegistrationController.map_to_player(entry)
+  RushWeb.PlayerRegistrationController.create_player_from_map(entry)
   |> RushWeb.PlayerRegistrationController.insert_player
 end)
