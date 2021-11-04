@@ -9,29 +9,6 @@ env:
   DB_PASSWORD: postgres
 
 jobs:
-  lint:
-    name: Code analysis with credo and dialyzer
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-elixir@v1
-        with:
-          elixir-version: "1.12"
-          otp-version: "24"
-          experimental-otp: true
-      - uses: actions/cache@v2
-        with:
-          key: ${{ runner.os }}-mix-${{ hashFiles('mix.lock') }}
-          path: |
-            deps
-            _build
-            priv/plts
-      - name: Install Phoenix and lint dependencies
-        run: |
-          mix deps.get
-          mix dialyzer --plt
-      - name: Run Credo and Dialyzer
-        run: mix lint
   test:
     name: Phoenix testing with ExUnit
     runs-on: ubuntu-latest

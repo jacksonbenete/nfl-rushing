@@ -12,7 +12,12 @@ defmodule Rush.Players.Contract do
   def player_from_json(data) do
     data
     |> Json.json_to_map
-    |> apply_contract(get_contract_player_from_json)
+    |> player_from_map
+  end
+
+  def player_from_map(map) do
+    map
+    |> apply_contract(get_contract)
     |> validate_player
   end
 
@@ -99,7 +104,7 @@ defmodule Rush.Players.Contract do
     end
   end
 
-  defp get_contract_player_from_json do
+  defp get_contract do
     %{
       "Player" => "name",
       "Team" => "team",

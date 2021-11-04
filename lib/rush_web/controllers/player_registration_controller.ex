@@ -15,4 +15,8 @@ defmodule RushWeb.PlayerRegistrationController do
   def create_player_from_json(data) do
     Contract.player_from_json(data)
   end
+
+  def create_player_from_map(map) do
+    Contract.player_from_map(map)
+  end
 end
