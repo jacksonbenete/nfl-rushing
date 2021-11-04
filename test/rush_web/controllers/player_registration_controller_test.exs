@@ -2,17 +2,16 @@ defmodule RushWeb.PlayerRegistrationControllerTest do
   use ExUnit.Case, async: true
 
   alias Ecto.Adapters.SQL.Sandbox
-  alias RushWeb.Controllers.Json
+  alias Rush.Json
   alias RushWeb.PlayerRegistrationController
 
-  describe "map_to_player/1" do
-    test "map_to_player/1 when receiving a valid map returns a valid player" do
+  describe "create_player_from_json/1" do
+    test "create_player_from_json/1 when receiving a valid map returns a valid player" do
       # Arrange
       data = "{\n    \"Player\":\"Joe Banyard\",\n    \"Team\":\"JAX\",\n    \"Pos\":\"RB\",\n    \"Att\":2,\n    \"Att/G\":2,\n    \"Yds\":7,\n    \"Avg\":3.5,\n    \"Yds/G\":7,\n    \"TD\":0,\n    \"Lng\":\"7\",\n    \"1st\":0,\n    \"1st%\":0,\n    \"20+\":0,\n    \"40+\":0,\n    \"FUM\":0\n  }"
-      map = Json.json_to_map(data)
 
       # Act
-      result = PlayerRegistrationController.map_to_player(map)
+      result = PlayerRegistrationController.create_player_from_json(data)
 
       # Assert
       assert %{
@@ -35,13 +34,12 @@ defmodule RushWeb.PlayerRegistrationControllerTest do
       } == result
     end
 
-    test "map_to_player/1 when receiving a LNG with touchdown returns a valid contract" do
+    test "create_player_from_json/1 when receiving a LNG with touchdown returns a valid contract" do
       # Arrange
       data = "{\n  \"Player\":\"Mark Ingram\",\n  \"Team\":\"NO\",\n  \"Pos\":\"RB\",\n  \"Att\":205,\n  \"Att/G\":12.8,\n  \"Yds\":\"1,043\",\n  \"Avg\":5.1,\n  \"Yds/G\":65.2,\n  \"TD\":6,\n  \"Lng\":\"75T\",\n  \"1st\":49,\n  \"1st%\":23.9,\n  \"20+\":4,\n  \"40+\":2,\n  \"FUM\":2\n}"
-      map = Json.json_to_map(data)
 
       # Act
-      result = PlayerRegistrationController.map_to_player(map)
+      result = PlayerRegistrationController.create_player_from_json(data)
 
       # Assert
       assert %{
@@ -63,17 +61,6 @@ defmodule RushWeb.PlayerRegistrationControllerTest do
        "fumbles" => 2
        } == result
     end
-
-    test "map_to_player/1 when receiving and empty map should return an empty map" do
-      # Arrange
-      map = %{}
-
-      # Act
-      result = PlayerRegistrationController.map_to_player(map)
-
-      # Assert
-      assert %{} = result
-    end
   end
 
   describe "insert_player/1" do
@@ -85,8 +72,7 @@ defmodule RushWeb.PlayerRegistrationControllerTest do
     test "insert_player/1 when receive a valid player map will persist on database" do
       # Arrange
       data = "{\n    \"Player\":\"Joe Banyard\",\n    \"Team\":\"JAX\",\n    \"Pos\":\"RB\",\n    \"Att\":2,\n    \"Att/G\":2,\n    \"Yds\":7,\n    \"Avg\":3.5,\n    \"Yds/G\":7,\n    \"TD\":0,\n    \"Lng\":\"7\",\n    \"1st\":0,\n    \"1st%\":0,\n    \"20+\":0,\n    \"40+\":0,\n    \"FUM\":0\n  }"
-      map = Json.json_to_map(data)
-      valid_player = PlayerRegistrationController.map_to_player(map)
+      valid_player = PlayerRegistrationController.create_player_from_json(data)
 
       # Act
       result = PlayerRegistrationController.insert_player(valid_player)

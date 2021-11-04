@@ -101,10 +101,16 @@ So, I created two functions to parse and validate the fields "Lng" and "Yds".
 The result is a very easy and elegant (I think) function.
 
 ```elixir
-  def map_to_player(%{} = map) do
+ def player_from_json(data) do
+    data
+    |> Json.json_to_map
+    |> apply_contract(get_contract_player_from_json)
+    |> validate_player
+ end
+
+ defp validate_player(%{} = map) do
     map
-    |> apply_contract()
     |> parse_longest_rush()
     |> parse_total_yards()
-  end
+ end
 ```
