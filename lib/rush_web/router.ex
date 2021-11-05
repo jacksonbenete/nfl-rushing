@@ -17,7 +17,7 @@ defmodule RushWeb.Router do
   scope "/", RushWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", RushLive.Index, :index
   end
 
   # Other scopes may use custom stacks.
@@ -37,6 +37,7 @@ defmodule RushWeb.Router do
 
     scope "/" do
       pipe_through :browser
+
       live_dashboard "/dashboard", metrics: RushWeb.Telemetry
     end
   end

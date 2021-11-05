@@ -1,0 +1,22 @@
+<section class="block mt-6 p-6">
+    <div class="p-2 w-full h-100"></div>
+</section>
+
+<section class="relative mx-auto pl-6">
+    <%= live_component RushWeb.StatisticsFilterComponent, changeset: @changeset %>
+</section>
+
+<section class="block mx-auto p-6 font-mono">
+<div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+    <div class="w-full overflow-x-auto">
+        <table class="w-full">
+            <thead>
+            <%= live_component RushWeb.StatisticsHeaderComponent %>
+            </thead>
+            <tbody class="bg-white"><%= for player <- @players do %>
+                <%= live_component RushWeb.StatisticsBodyComponent, player: player %>
+            <% end %></tbody>
+        </table>
+    </div>
+</div>
+</section>

@@ -1,0 +1,26 @@
+<tr class="text-gray-700" phx-value-id={@player.id}>
+<td class="px-4 py-3 border" headers="Player">
+<div class="flex items-center text-sm">
+<div class="relative w-8 h-8 mr-3 rounded-full md:block">
+<img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
+<div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+</div>
+<div>
+<p class="font-semibold text-black"> <%= @player.name %> </p>
+<p class="text-xs text-gray-600"> <%= @player.team %> - <%= @player.position %> </p>
+</div>
+</div>
+</td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="Yds"> <%= @player.total_yards %> </td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="TD"> <%= @player.total_touchdowns %> </td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="Lng"> <%= @player.longest_rush %> </td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="Att"> <%= @player.attempts %> </td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="Avg"> <%= @player.average_yards_per_attempt %> </td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="Att/G"> <%= @player.attempts_per_game %> </td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="Yds/G"> <%= @player.yards_per_game %> </td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="1st"> <%= @player.total_first_downs %> </td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="1st%"> <%= @player.first_downs_percentage %>% </td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="20+"> <%= @player.rush_20_plus %> </td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="40+"> <%= @player.rush_40_plus %> </td>
+<td class="px-4 py-3 text-ms font-semibold border" headers="Fum"> <%= @player.fumbles %> </td>
+</tr>

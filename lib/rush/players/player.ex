@@ -13,6 +13,7 @@ defmodule Rush.Players.Player do
     field :attempts, :integer, virtual: true
     field :attempts_per_game, :float, virtual: true
     field :total_yards, :integer, virtual: true
+    field :average_yards_per_attempt, :float, virtual: true
     field :yards_per_game, :float, virtual: true
     field :total_touchdowns, :integer, virtual: true
     field :longest_rush, :integer, virtual: true

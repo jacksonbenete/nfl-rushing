@@ -10,6 +10,7 @@ defmodule Rush.Statistics.PlayerStatistic do
     field :attempts, :integer
     field :attempts_per_game, :float
     field :total_yards, :integer
+    field :average_yards_per_attempt, :float
     field :yards_per_game, :float
     field :total_touchdowns, :integer
     field :longest_rush, :integer
@@ -28,7 +29,7 @@ defmodule Rush.Statistics.PlayerStatistic do
 
   def changeset(struct, attrs, _opts \\ []) do
     fields = [
-      :attempts, :attempts_per_game, :total_yards, :yards_per_game, :total_touchdowns,
+      :attempts, :attempts_per_game, :total_yards, :average_yards_per_attempt, :yards_per_game, :total_touchdowns,
       :longest_rush, :longest_rush_is_touchdown, :total_first_downs,
       :first_downs_percentage, :rush_20_plus, :rush_40_plus, :fumbles, :player_id
     ]

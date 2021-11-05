@@ -25,7 +25,15 @@ config :rush, RushWeb.Endpoint,
   secret_key_base: "d8M93bQ1FXIoOYsx8rWj0A04xAshihO7xolkBHdn6AiVVI+QEuQ00wJcIONVAPzf",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    npx: [
+      "tailwindcss",
+      "--input=css/app.css",
+      "--output=../priv/static/assets/app.css",
+      "--watch",
+      cd: Path.expand("../assets", __DIR__)
+    ]
+
   ]
 
 # ## SSL Support
