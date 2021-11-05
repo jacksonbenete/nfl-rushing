@@ -9,13 +9,22 @@ defmodule RushWeb.RushLive.Index do
     {
       :ok,
       socket
-      |> validate_filter(%{})
-      |> list_players
       |> assign(:filter, "")
       |> assign(:sort, :false)
       |> assign(:sorting_order, :asc)
       |> assign(:page, 1)
       |> assign(:size, 10)
+    }
+  end
+
+  def handle_params(params, _uri, socket) do
+    filter = params["filter"]
+
+    {
+      :noreply,
+      socket
+      |> validate_filter(%{filter: filter})
+      |> list_players(filter)
     }
   end
 

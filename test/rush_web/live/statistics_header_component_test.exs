@@ -27,5 +27,5 @@ defmodule RushWeb.StatisticsHeaderComponentTest do
       </tr>
       """
     end
-  end  
+  end
 end
