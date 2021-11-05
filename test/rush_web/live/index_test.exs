@@ -1,15 +1,16 @@
 defmodule RushWeb.IndexTest do
   use RushWeb.ConnCase, async: true
 
-  import Phoenix.ConnTest
+  alias Ecto.Adapters.SQL.Sandbox
+  alias Rush.Json
+
   import Phoenix.LiveViewTest
 
   describe "index" do
-    test "disconnected and connected mount", %{conn: conn} do
-      conn = get(conn, "/")
-      assert html_response(conn, 200) =~ "</tbody>\n        </table>\n    </div>"
+    test "index when connected handle_params/3 should render table", %{conn: conn} do
+      {:ok, _view, html} = live(conn, "/")
 
-      {:ok, view, html} = live(conn)
+      assert html =~ "<tbody class=\"bg-white\"><tr class=\"text-gray-700\" phx-value-id=\"1\">"
     end
 
     test "search input when receive a name should filter table", %{conn: conn} do

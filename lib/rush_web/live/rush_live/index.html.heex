@@ -13,11 +13,9 @@
             <thead>
             <%= live_component RushWeb.StatisticsHeaderComponent %>
             </thead>
-            <tbody class="bg-white">
-            <%= for player <- @players do %>
+            <tbody class="bg-white"><%= for player <- @players do %>
                 <%= live_component RushWeb.StatisticsBodyComponent, player: player %>
-            <% end %>
-            </tbody>
+            <% end %></tbody>
         </table>
     </div>
 </div>

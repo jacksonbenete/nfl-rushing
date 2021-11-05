@@ -6,26 +6,19 @@ defmodule RushWeb.RushLive.Index do
   alias RushWeb.StatisticsFilterComponent
 
   def mount(_params, _session, socket) do
-    {
-      :ok,
-      socket
-      |> assign(:filter, "")
-      |> assign(:sort, :false)
-      |> assign(:sorting_order, :asc)
-      |> assign(:page, 1)
-      |> assign(:size, 10)
-    }
+    {:ok,
+     socket
+     |> validate_filter
+     |> assign(players: [])}
   end
 
-  def handle_params(params, _uri, socket) do
-    filter = params["filter"]
+  def handle_params(params, _, socket) do
+    filter = %{"filter" => params["filter"]}
 
-    {
-      :noreply,
-      socket
-      |> validate_filter(%{filter: filter})
-      |> list_players(filter)
-    }
+    {:noreply,
+    socket
+    |> validate_filter(filter)
+    |> list_players(filter)}
   end
 
   def handle_event("filter_player", %{"filter" => filter}, socket) do
@@ -39,8 +32,11 @@ defmodule RushWeb.RushLive.Index do
     {:noreply, socket}
   end
 
-  defp validate_filter(socket, filter) do
-    assign(socket, changeset: StatisticsFilterComponent.validate(filter))
+  defp validate_filter(socket) do
+    assign(socket, changeset: StatisticsFilterComponent.validate(%{filter: ""}), filter: "")
+  end
+  defp validate_filter(socket, %{"filter" => query_string} = filter) do
+    assign(socket, changeset: StatisticsFilterComponent.validate(filter), filter: query_string)
   end
 
   defp list_players(socket, filter \\ []) do

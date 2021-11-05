@@ -1,7 +1,6 @@
 defmodule RushWeb.StatisticsBodyComponentTest do
   use RushWeb.ConnCase, async: true
 
-  import Phoenix.ConnTest
   import Phoenix.LiveViewTest
 
   alias RushWeb.StatisticsBodyComponent
