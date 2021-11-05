@@ -55,7 +55,9 @@ defmodule Rush.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:csv, "~> 2.4"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false}
+      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:httpoison, "~> 1.8"},
+      {:phx_gen_tailwind, "~> 0.1.3", only: :dev}
     ]
   end
 
@@ -67,11 +69,11 @@ defmodule Rush.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup"],
+      setup: ["deps.get", "ecto.setup", "cmd --cd assets npm install"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test --trace --color"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"],
+      "assets.deploy": ["cmd --cd assets npm run deploy", "esbuild default --minify", "phx.digest"],
       lint: ["credo --strict", "dialyzer"]
     ]
   end
