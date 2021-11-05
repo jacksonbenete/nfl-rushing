@@ -114,3 +114,33 @@ The result is a very easy and elegant (I think) function.
     |> parse_total_yards()
  end
 ```
+
+If I want to inspect a specific field, such as "Avg", I can do the following:
+
+```elixir
+json = File.read!("priv/repo/rushing.json") |> Jason.decode!()
+
+Enum.zip(json)
+|> Enum.map(fn x -> Tuple.to_list(x) end)
+|> Enum.map(fn list -> Enum.filter(list, fn tuple -> elem(tuple, 0) == "Avg" end) end)
+|> Enum.filter(fn list -> list != [] end)
+```
+
+The steps are the same except for the third, where I filter all tuples for the field "Avg".
+
+I have created a module to wrap those functions to help visualize and validate the data.
+The module can be found on `lib/rush/data_analysis.ex` to help on explore the data and ensure validation.
+
+```elixir
+iex(1)> data = Rush.DataAnalysis.data_collection_from_file("priv/repo/rushing.json")
+...
+iex(2)> Rush.DataAnalysis.find_type(data, &is_bitstring/1)
+["Lng", "Player", "Pos", "Team", "Yds"]
+iex(3)> Rush.DataAnalysis.explore_field(data, "Avg")
+[
+   {"Avg", 3.5},
+   {"Avg", 1},
+   {"Avg", 2},
+   {"Avg", 0.5},
+...
+```

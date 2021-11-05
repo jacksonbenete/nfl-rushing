@@ -6,6 +6,7 @@ defmodule Rush.Repo.Migrations.CreatePlayerStatistics do
       add :attempts, :int, null: false
       add :attempts_per_game, :float, null: false
       add :total_yards, :int, null: false
+      add :average_yards_per_attempt, :float, null: false
       add :yards_per_game, :float, null: false
       add :total_touchdowns, :int, null: false
       add :longest_rush, :int, null: false
