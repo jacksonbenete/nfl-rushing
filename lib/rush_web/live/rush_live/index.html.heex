@@ -4,7 +4,7 @@
 
 <section class="relative mx-auto pl-6">
     <div class="grid grid-cols-3">
-        <%= live_component RushWeb.StatisticsFilterComponent, changeset: @changeset %>
+        <%= live_component RushWeb.StatisticsFilterComponent, changeset: @changeset, id: "filter" %>
         <div></div>
         <div class="grid grid-cols-1 justify-items-end pr-6">
             <%= live_component RushWeb.StatisticsPaginationComponent, page: @page, total_pages: @total_pages, id: "pagination" %>
@@ -19,8 +19,8 @@
             <thead>
             <%= live_component RushWeb.StatisticsHeaderComponent %>
             </thead>
-            <tbody class="bg-white"><%= for player <- @players do %>
-                <%= live_component RushWeb.StatisticsBodyComponent, player: player %>
+            <tbody id="table-body" class="bg-white"><%= for {player, counter} <- Enum.with_index(@players) do %>
+                <%= live_component RushWeb.StatisticsBodyComponent, player: player, counter: counter%>
             <% end %></tbody>
         </table>
     </div>

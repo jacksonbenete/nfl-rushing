@@ -1,11 +1,11 @@
 <div class="inline-flex">
-    <button phx-click="previous_page" id="previous_page_button" class={"#{@previous_button.colour} text-gray-800 font-bold py-2 px-4 rounded-l"} #{@previous_button.disabled}>
+    <button phx-click="previous_page" id="previous_page_button" style={@previous_button.css} class={"#{@previous_button.colour} text-gray-800 font-bold py-2 px-4 rounded-l"} #{@previous_button.disabled}>
         Prev
     </button>
-    <button class="font-bold py-2 px-4 rounded-r">
+    <button id="total_pages_button" style="cursor: default" class="font-bold py-2 px-4" cursor >
         <%= @page %>/<%= @total_pages %>
     </button>
-    <button phx-click="next_page" id="next_page_button" class={"#{@next_button.colour} text-gray-800 font-bold py-2 px-4 rounded-r"} #{@next_button.disabled}>
+    <button phx-click="next_page" id="next_page_button" style={@previous_button.css} class={"#{@next_button.colour} text-gray-800 font-bold py-2 px-4 rounded-r"} #{@next_button.disabled}>
         Next
     </button>
 </div>

@@ -2,99 +2,103 @@ defmodule RushWeb.RushLive.Index do
   @moduledoc false
   use RushWeb, :live_view
 
-  alias Rush.Players
+  alias Rush
   alias RushWeb.StatisticsFilterComponent
 
   def mount(_params, _session, socket) do
-    {:ok,
-     socket
-     |> validate_filter
-     |> assign(players: [])}
+    {
+      :ok,
+      socket
+      |> assign(set_page_params)
+      |> validate_filter
+    }
   end
 
   def handle_params(params, _, socket) do
-    query_string = params["filter"]
-    filter = %{"filter" => query_string}
-    page = params["page"] || 1
-    page_size = params["page_size"] || 10
+    page_params = set_page_params(params)
 
-    {:noreply,
-    socket
-    |> assign(page: page, page_size: page_size)
-    |> validate_filter(filter)
-    |> list_players(query_string)}
+    {
+      :noreply,
+      socket
+      |> assign(page_params)
+      |> validate_filter
+      |> list_players
+    }
   end
 
-  def handle_event("filter_player", %{"filter" => filter}, socket) do
-    query_string = Map.get(filter, "filter")
-    params_map = get_page_params(socket)
-    params_map = Map.replace!(params_map, :filter, query_string)
+  def handle_event("filter_player", %{"input" => %{"filter" => query_string}}, socket) do
+    page_params = update_page_params(socket, :filter, query_string)
 
-    socket = socket
-    |> validate_filter(filter)
-    |> list_players(query_string)
-    |> assign(:filter, query_string)
-
-    {:noreply, push_patch(socket, to: Routes.rush_index_path(socket, :index, params_map))}
+    {
+      :noreply,
+      socket
+      |> push_patch(to: Routes.rush_index_path(socket, :index, page_params))
+    }
   end
 
   def handle_event("previous_page", _value, socket) do
     new_page = socket.assigns.page - 1
-    params_map = get_page_params(socket)
-    params_map = Map.replace!(params_map, :page, new_page)
+    page_params = update_page_params(socket, :page, new_page)
 
-    socket = socket
-    |> assign(page: new_page)
-    |> list_players(socket.assigns.filter)
-
-    {:noreply, push_patch(socket, to: Routes.rush_index_path(socket, :index, params_map))}
+    {
+      :noreply,
+      socket
+      |> push_patch(to: Routes.rush_index_path(socket, :index, page_params))
+    }
   end
 
   def handle_event("next_page", _value, socket) do
     new_page = socket.assigns.page + 1
-    params_map = get_page_params(socket)
-    params_map = Map.replace!(params_map, :page, new_page)
+    page_params = update_page_params(socket, :page, new_page)
 
-    socket = socket
-    |> assign(page: new_page)
-    |> list_players(socket.assigns.filter)
-
-    {:noreply, push_patch(socket, to: Routes.rush_index_path(socket, :index, params_map))}
+    {
+      :noreply,
+      socket
+      |> push_patch(to: Routes.rush_index_path(socket, :index, page_params))
+    }
   end
 
   defp validate_filter(socket) do
-    assign(socket, changeset: StatisticsFilterComponent.validate(%{filter: ""}), filter: "")
-  end
-  defp validate_filter(socket, %{"filter" => query_string} = filter) do
-    assign(socket, changeset: StatisticsFilterComponent.validate(filter), filter: query_string)
+    query_string = socket.assigns.filter
+
+    socket
+    |> assign(changeset: StatisticsFilterComponent.validate(%{filter: query_string}))
   end
 
-  defp list_players(socket, filter \\ []) do
+  defp list_players(socket) do
     page_params = get_page_params(socket)
 
+    database =
     case socket.assigns.changeset.valid? do
-      true ->
-        database = search_players(filter, page_params)
-        assign(socket, players: database.entries, page: database.page_number, total_pages: database.total_pages)
-      false ->
-        database = get_players_list(page_params)
-        assign(socket, players: database.entries, page: database.page_number, total_pages: database.total_pages)
+      true -> Rush.search_players(page_params)
+      false -> Rush.get_players_list(page_params)
     end
+
+    socket
+    |> assign(players: database.entries, page: database.page_number, total_pages: database.total_pages)
   end
 
-  defp get_players_list(params) do
-    Players.get_all(params)
+  defp update_page_params(socket, field, value) do
+    get_page_params(socket)
+    |> Map.replace!(field, value)
   end
 
-  defp search_players(filter, params) do
-    Players.search_player(filter, params)
+  defp set_page_params(params \\ %{}) do
+    players = []
+    filter = params["filter"] || ""
+    filter_type = params["filter_type"] || "strict"
+    page = params["page"] || 1
+    page_size = params["page_size"] || 10
+
+    %{players: players, page: page, page_size: page_size, filter: filter, filter_type: filter_type}
   end
 
   defp get_page_params(socket) do
+    filter = socket.assigns.filter
+    filter_type = socket.assigns.filter_type
     page = socket.assigns.page
     page_size = socket.assigns.page_size
-    filter = socket.assigns.filter
 
-    %{page: page, page_size: page_size, filter: filter}
+    %{page: page, page_size: page_size, filter: filter, filter_type: filter_type}
   end
 end

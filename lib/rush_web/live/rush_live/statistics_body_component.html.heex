@@ -1,4 +1,4 @@
-<tr class="text-gray-700" phx-value-id={@player.id}>
+<tr class={"text-gray-700 #{ if rem(@counter, 2) == 1 do "bg-gray-100" end}"} phx-value-id={@player.id}>
 <td class="px-4 py-3 border" headers="Player">
 <div class="flex items-center text-sm">
 <div class="relative w-8 h-8 mr-3 rounded-full md:block">

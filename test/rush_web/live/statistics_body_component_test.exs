@@ -29,7 +29,7 @@ defmodule RushWeb.StatisticsBodyComponentTest do
       }
 
       # Act
-      result = render_component(StatisticsBodyComponent, player: valid_player)
+      result = render_component(StatisticsBodyComponent, player: valid_player, counter: 1)
 
       # Assert
       assert result =~
@@ -72,7 +72,7 @@ defmodule RushWeb.StatisticsBodyComponentTest do
 
       # Assert
       assert_raise KeyError, fn ->
-        render_component(StatisticsBodyComponent, player: invalid_player)
+        render_component(StatisticsBodyComponent, player: invalid_player, counter: 1)
       end
     end
   end

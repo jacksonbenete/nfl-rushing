@@ -5,8 +5,8 @@
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </button>
         </span>
-        <%= form_for @changeset, "#", [as: :filter, phx_change: :filter_player, onkeydown: "return event.key != 'Enter';"], fn f-> %>
-        <%= text_input f, :filter, [class: "border-2 border-black-500 py-2 text-sm rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900", placeholder: "Search...", autocomplete: "off"] %>
+        <%= form_for @changeset, "#", [id: "filter_player_form", as: :input, phx_change: :filter_player, onkeydown: "return event.key != 'Enter';"], fn f-> %>
+        <%= text_input f, :filter, [id: "filter_player_input", class: "border-2 border-black-500 py-2 text-sm rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900", placeholder: "Search...", autocomplete: "off"] %>
         <% end %>
     </div>
     <div></div>

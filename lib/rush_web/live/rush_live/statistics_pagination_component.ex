@@ -23,15 +23,15 @@ defmodule RushWeb.StatisticsPaginationComponent do
 
   defp get_previous_button_attrs(page, total_pages) do
     case page == 1 do
-      true -> %{disabled: "disabled", colour: "bg-gray-100"}
-      _ -> %{disabled: "", colour: "bg-blue-500 hover:bg-gray-400"}
+      true -> %{disabled: "disabled cursor: default", css: "cursor: default", colour: "bg-gray-100"}
+      _ -> %{disabled: "", css: "", colour: "bg-blue-500 hover:bg-gray-400"}
     end
   end
 
   defp get_next_button_attrs(page, total_pages) do
     case page == total_pages do
-      true -> %{disabled: "disabled", colour: "bg-gray-100"}
-      _ -> %{disabled: "", colour: "bg-blue-500 hover:bg-gray-400"}
+      true -> %{disabled: "disabled", css: "cursor: default", colour: "bg-gray-100"}
+      _ -> %{disabled: "", css: "", colour: "bg-blue-500 hover:bg-gray-400"}
     end
   end
 end
