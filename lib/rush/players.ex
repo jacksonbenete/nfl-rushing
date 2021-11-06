@@ -27,13 +27,19 @@ defmodule Rush.Players do
     end)
   end
 
-  def get_all do
+  def get_all(params) do
     valid_schema
-    |> Repo.all
+    |> Repo.paginate(params)
   end
 
-  def search_player(query_string) do
-     start_character = String.slice(query_string, 0..1)
+  def search_player(query_string, params) do
+    page =
+    search_query(query_string)
+    |> Repo.paginate(params)
+  end
+
+  defp search_query(query_string) do
+    start_character = String.slice(query_string, 0..1)
 
     from(
       player in Player,
@@ -42,7 +48,6 @@ defmodule Rush.Players do
       order_by: fragment("LEVENSHTEIN(?, ?)", player.name, ^query_string),
       right_join: statistic in PlayerStatistic,
       on: statistic.player_id == player.id,
-      limit: 10,
       select_merge: %{
         attempts: statistic.attempts,
         attempts_per_game: statistic.attempts_per_game,
@@ -59,7 +64,6 @@ defmodule Rush.Players do
         fumbles: statistic.fumbles
       }
     )
-    |> Repo.all()
   end
 
   # TODO: remover artificial limit
@@ -68,7 +72,6 @@ defmodule Rush.Players do
       player in Player,
       right_join: statistic in PlayerStatistic,
       on: statistic.player_id == player.id,
-      limit: 10,
       select_merge: %{
         attempts: statistic.attempts,
         attempts_per_game: statistic.attempts_per_game,

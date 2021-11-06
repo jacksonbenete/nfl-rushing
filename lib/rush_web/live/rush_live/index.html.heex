@@ -3,7 +3,13 @@
 </section>
 
 <section class="relative mx-auto pl-6">
-    <%= live_component RushWeb.StatisticsFilterComponent, changeset: @changeset %>
+    <div class="grid grid-cols-3">
+        <%= live_component RushWeb.StatisticsFilterComponent, changeset: @changeset %>
+        <div></div>
+        <div class="grid grid-cols-1 justify-items-end pr-6">
+            <%= live_component RushWeb.StatisticsPaginationComponent, page: @page, total_pages: @total_pages, id: "pagination" %>
+        </div>
+    </div>
 </section>
 
 <section class="block mx-auto p-6 font-mono">

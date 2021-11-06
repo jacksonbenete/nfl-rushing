@@ -57,7 +57,8 @@ defmodule Rush.MixProject do
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:httpoison, "~> 1.8"},
-      {:phx_gen_tailwind, "~> 0.1.3", only: :dev}
+      {:phx_gen_tailwind, "~> 0.1.3", only: :dev},
+      {:scrivener_ecto, "~> 2.0"}
     ]
   end
 
