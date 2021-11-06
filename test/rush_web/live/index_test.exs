@@ -10,7 +10,7 @@ defmodule RushWeb.IndexTest do
     test "index when connected handle_params/3 should render table", %{conn: conn} do
       {:ok, _view, html} = live(conn, "/")
 
-      assert html =~ "<tbody class=\"bg-white\"><tr class=\"text-gray-700\" phx-value-id=\"1\">"
+      assert html =~ "<tbody id=\"table-body\" class=\"bg-white\"><tr"
     end
 
     test "search input when receive a name should filter table", %{conn: conn} do
@@ -23,8 +23,8 @@ defmodule RushWeb.IndexTest do
       assert html =~ another_player_name
 
       # Act Assert (after search can't find another_player)
-      refute render_hook(view, :filter_player, %{filter: %{filter: search_player_name}}) =~ another_player_name
-      assert render_hook(view, :filter_player, %{filter: %{filter: search_player_name}}) =~ search_player_name
+      refute render_hook(view, :filter_player, %{input: %{filter: search_player_name}}) =~ another_player_name
+      assert render_hook(view, :filter_player, %{input: %{filter: search_player_name}}) =~ search_player_name
     end
   end
 end

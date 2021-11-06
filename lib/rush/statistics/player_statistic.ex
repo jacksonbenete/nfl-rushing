@@ -28,13 +28,17 @@ defmodule Rush.Statistics.PlayerStatistic do
   end
 
   def changeset(struct, attrs, _opts \\ []) do
-    fields = [
+    fields = get_statistics_contract
+    struct
+    |> cast(attrs, fields)
+    |> validate_required(fields)
+  end
+
+  defp get_statistics_contract do
+    [
       :attempts, :attempts_per_game, :total_yards, :average_yards_per_attempt, :yards_per_game, :total_touchdowns,
       :longest_rush, :longest_rush_is_touchdown, :total_first_downs,
       :first_downs_percentage, :rush_20_plus, :rush_40_plus, :fumbles, :player_id
     ]
-    struct
-    |> cast(attrs, fields)
-    |> validate_required(fields)
   end
 end
