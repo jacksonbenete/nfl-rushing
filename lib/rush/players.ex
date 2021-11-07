@@ -21,7 +21,6 @@ defmodule Rush.Players do
     Player
     |> fetch_statistics
     |> sort_player_statistics(params)
-    |> Repo.paginate(params)
   end
 
   def search_player(params) do
@@ -32,7 +31,16 @@ defmodule Rush.Players do
     |> fetch_statistics
     |> sort_player_statistics(params)
     |> filter_player(query_string, filter_type)
+  end
+
+  def pagination(query, params) do
+    query
     |> Repo.paginate(params)
+  end
+
+  def all(query) do
+    query
+    |> Repo.all
   end
 
   defp sort_player_statistics(query, params) do

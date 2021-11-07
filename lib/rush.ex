@@ -11,9 +11,16 @@ defmodule Rush do
 
   def get_players_list(params) do
     Players.get_all(params)
+    |> Players.pagination(params)
   end
 
   def search_players(params) do
     Players.search_player(params)
+    |> Players.pagination(params)
+  end
+
+  def search_players_export(params) do
+    Players.search_player(params)
+    |> Players.all
   end
 end

@@ -83,6 +83,19 @@ defmodule Rush.Players.Contract do
     |> Map.put("longest_rush_is_touchdown", :false)
   end
 
+  def recover_longest_rush_T(%{longest_rush: longest_rush, longest_rush_is_touchdown: longest_rush_is_touchdown} = map) do
+    case longest_rush_is_touchdown do
+      true -> map |> Map.replace!(:longest_rush, "#{Integer.to_string(longest_rush)}T")
+      _ -> map |> Map.replace!(:longest_rush, Integer.to_string(longest_rush))
+    end
+  end
+  def recover_longest_rush_T(longest_rush, longest_rush_is_touchdown) do
+    case longest_rush_is_touchdown do
+      true -> "#{Integer.to_string(longest_rush)}T"
+      _ -> Integer.to_string(longest_rush)
+    end
+  end
+
   @doc """
   This method receives the "total_yards" attribute (Yds) and parses its value.
   The value can arrive as a String or as Integer, if it's a String removes any
