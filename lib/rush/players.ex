@@ -29,9 +29,9 @@ defmodule Rush.Players do
     filter_type = params.filter_type
 
     Player
-    |> filter_player(query_string, filter_type)
     |> fetch_statistics
     |> sort_player_statistics(params)
+    |> filter_player(query_string, filter_type)
     |> Repo.paginate(params)
   end
 

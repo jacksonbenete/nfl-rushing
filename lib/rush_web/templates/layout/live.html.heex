@@ -1,3 +1,6 @@
+<header class="fixed top-0 left-0 right-0 z-30 px-2 py-4 bg-white shadow sm:px-4">
+  <%= render "header.html" %>
+</header>
 <main class="container">
   <p class="alert alert-info" role="alert"
     phx-click="lv:clear-flash"
@@ -9,3 +12,6 @@
 
   <%= @inner_content %>
 </main>
+<footer class="fixed bottom-0 py-2 left-0 right-0 mt-auto bg-gray-800">
+  <%= render "footer.html" %>
+</footer>
