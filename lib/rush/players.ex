@@ -20,6 +20,7 @@ defmodule Rush.Players do
   def get_all(params) do
     Player
     |> fetch_statistics
+    |> sort_player_statistics(params)
     |> Repo.paginate(params)
   end
 
@@ -30,7 +31,16 @@ defmodule Rush.Players do
     Player
     |> filter_player(query_string, filter_type)
     |> fetch_statistics
+    |> sort_player_statistics(params)
     |> Repo.paginate(params)
+  end
+
+  defp sort_player_statistics(query, params) do
+    sort = String.to_atom(params.sort)
+    sort_order = String.to_atom(params.sort_order)
+
+    query
+    |> order_by([player, statistic], [{^sort_order, field(statistic, ^sort)}])
   end
 
   defp filter_player(query, query_string, "strict") do

@@ -17,7 +17,7 @@
     <div class="w-full overflow-x-auto">
         <table class="w-full">
             <thead>
-            <%= live_component RushWeb.StatisticsHeaderComponent %>
+            <%= live_component RushWeb.StatisticsHeaderComponent, sort: %{sort: @sort, sort_order: @sort_order} %>
             </thead>
             <tbody id="table-body" class="bg-white"><%= for {player, counter} <- Enum.with_index(@players) do %>
                 <%= live_component RushWeb.StatisticsBodyComponent, player: player, counter: counter%>
