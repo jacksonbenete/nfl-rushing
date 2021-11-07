@@ -1,8 +1,29 @@
 <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
 <th class="px-4 py-3" id="Player">Name</th>
-<th class="px-4 py-3" id="Yds">Yds</th>
-<th class="px-4 py-3" id="TD">TD</th>
-<th class="px-4 py-3" id="Lng">Lng</th>
+<th class="px-4 py-3 text-blue-600" style="cursor: pointer" id="Yds"
+    phx-click="sort_statistics" phx-value-sort="total_yards" phx-value-sort_order={case @sort.sort_order do "asc" -> "desc"; _ -> "asc" end}>Yds
+<%= case @sort do
+  %{sort: "total_yards", sort_order: "asc"} -> "↑"
+  %{sort: "total_yards", sort_order: "desc"} -> "↓"
+  _ -> ""
+end %>
+</th>
+<th class="px-4 py-3 text-blue-600" style="cursor: pointer" id="TD"
+    phx-click="sort_statistics" phx-value-sort="total_touchdowns" phx-value-sort_order={case @sort.sort_order do "asc" -> "desc"; _ -> "asc" end}>TD
+<%= case @sort do
+  %{sort: "total_touchdowns", sort_order: "asc"} -> "↑"
+  %{sort: "total_touchdowns", sort_order: "desc"} -> "↓"
+  _ -> ""
+end %>
+</th>
+<th class="px-4 py-3 text-blue-600" style="cursor: pointer" id="Lng"
+    phx-click="sort_statistics" phx-value-sort="longest_rush" phx-value-sort_order={case @sort.sort_order do "asc" -> "desc"; _ -> "asc" end}>Lng
+<%= case @sort do
+  %{sort: "longest_rush", sort_order: "asc"} -> "↑"
+  %{sort: "longest_rush", sort_order: "desc"} -> "↓"
+  _ -> ""
+end %>
+</th>
 <th class="px-4 py-3" id="Att">Att</th>
 <th class="px-4 py-3" id="Avg">Avg</th>
 <th class="px-4 py-3" id="Att/G">Att/G</th>

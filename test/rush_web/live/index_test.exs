@@ -16,7 +16,7 @@ defmodule RushWeb.IndexTest do
     test "search input when receive a name should filter table", %{conn: conn} do
       # Arrange
       search_player_name = "Joe Banyard"
-      another_player_name = "Shaun Hill"
+      another_player_name = "Ezekiel Elliott"
 
       # Act Assert (before searching can find another_player)
       {:ok, view, html} = live(conn, "/")
