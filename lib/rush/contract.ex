@@ -1,14 +1,14 @@
 defmodule Rush.Players.Contract do
-  @moduledoc false
+  @moduledoc """
+  This module implements an anti-corruption layer.
+  It validates and parses data from different sources (json, map, etc)
+  and maps it to a valid Player (Rush.Players.Player).
+  """
 
   alias Rush.Json
   alias Rush.Players.Player
   alias Rush.Statistics.PlayerStatistic
 
-  @doc """
-  This function applies the contract acting like an anti-corruption layer,
-  then it validates the player by parsing and validating the fields.
-  """
   def player_from_json(data) do
     data
     |> Json.json_to_map

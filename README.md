@@ -144,3 +144,38 @@ iex(3)> Rush.DataAnalysis.explore_field(data, "Avg")
    {"Avg", 0.5},
 ...
 ```
+
+With a valid data persisted in the database, we can start working on the requirements.
+
+### Second Step
+
+The second step consisted of developing the front-end application and designing the events to match the requirements.
+
+I was using the most common architecture design for working with LiveView, which is pretty much,
+forget MVC and your LiveView do almost everything but business logic.
+
+After a while I decided to refactor the code and I started using the LiveView main file only as a "View".
+Inside the live folder, you'll find a "index.ex", which is the Live`View` file, and a "index_controller.ex" where
+I extracted all the helper functions and logic that was not the handle_params/3 and handle_event/3 functions.
+
+Then I created one live component for each needed component.
+The live component helps into testing the view, and it also helps organizing the code
+applying the single-responsibility principle.
+
+I wrote tests for each live component, and I've wrote some documentations.
+About this, not all code is documented, and the documentations was more about explaining how I organized the files.
+I've tried to write code as DRY as I could, and I've tried to create façades,
+small functions and utilize the MVC design pattern as much as I could as LiveView kinds of advocate the opposite.
+
+All events patches the url, so you can also manipulate params directly and share "state" to other users.
+The sorting isn't cumulative, if you sort Yds, you order_by Yds.
+Filter is strict, it start filtering from the third typed character,
+but you can enable fuzzy filtering. Try `?filter=fuzzy`.
+
+I've found this table design searching about Tailwind tables. I liked it very much and stole it for us.
+I put this little boy picture as a placeholder, I thought it would be cool to show the Team logo or wordmark
+in the future, could be consuming an API or holding the images as assets. Alternatively we could use the players
+pictures as well.
+
+The design is responsive, on a medium display the table will receive a scroll, on a small display we start
+omitting columns to fit.
