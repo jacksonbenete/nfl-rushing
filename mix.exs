@@ -73,7 +73,7 @@ defmodule Rush.MixProject do
       setup: ["deps.get", "ecto.setup", "cmd --cd assets npm install"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "run test/test_seeds.exs", "test --trace --color"],
+      test: ["ecto.drop", "ecto.create --quiet", "ecto.migrate --quiet", "run test/test_seeds.exs", "test --trace --color"],
       "assets.deploy": ["cmd --cd assets npm run deploy", "esbuild default --minify", "phx.digest"],
       lint: ["credo --strict", "dialyzer"]
     ]
