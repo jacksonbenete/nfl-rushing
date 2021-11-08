@@ -17,7 +17,7 @@ defmodule RushWeb.StatisticsFilterComponent do
     |> Changeset.cast(params, Map.keys(@types))
     |> Changeset.validate_required([:filter])
     |> Changeset.update_change(:filter, &String.trim/1)
-    |> Changeset.validate_length(:filter, min: 3)
+#    |> Changeset.validate_length(:filter, min: 3)
     |> Changeset.validate_format(:filter, ~r/[A-Za-z0-9\ ]/)
     |> Map.put(:action, :validate)
   end
