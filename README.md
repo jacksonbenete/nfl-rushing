@@ -54,7 +54,29 @@ We will evaluate you on your ability to solve the problem defined in the require
 If you have any questions regarding requirements, do not hesitate to email your contact at theScore for clarification.
 
 ### Installation and running this solution
-... TODO
+You need [Elixir 1.12](https://github.com/elixir-lang/elixir/releases/tag/v1.12.0) installed.
+
+You need [PostgreSQL](https://www.postgresql.org/download/) installed.
+
+If you're not using the default PostgreSQL port and configurations, change the database params at [`config/dev.exs`](/config/dev.exs).
+
+Clone this repository, run mix setup and start the Phoenix server.
+```shell
+git clone https://github.com/jacksonbenete/nfl-rushing.git
+cd nfl-rushing
+mix setup
+mix phx.server
+```
+
+`mix setup` will install Phoenix 1.6.2 and all other dependencies if you've installed Elixir correctly.
+If you're having problems with Elixir versions and don't already use a version manager try the following guide: [Upgrading Phoenix projects to latest Elixir](https://blog.rebased.dev/posts/upgrade-elixir-1.9/)
+
+The alternative is to setup a Docker with Elixir, PostgreSQL or both.
+
+Once mix setup finishes installing dependencies, running all migrations and seeding the database,
+you can do `mix phx.server` and access the application at [`http://localhost:4000/`](http://localhost:4000/).
+
+You can run `mix test` to setup a test database and run all unit and integration tests.
 
 ## A brief discussion about the solution
 
