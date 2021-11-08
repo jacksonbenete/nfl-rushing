@@ -37,3 +37,6 @@ npm-debug.log
 # Dialyzer
 /priv/plts/*.plt
 /priv/plts/*.plt.hash
+
+# CSS exporter folder
+/priv/static/exports/

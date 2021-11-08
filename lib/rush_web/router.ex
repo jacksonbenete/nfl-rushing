@@ -14,10 +14,20 @@ defmodule RushWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :export do
+    plug :accepts, ["csv"]
+  end
+
   scope "/", RushWeb do
     pipe_through :browser
 
     live "/", RushLive.Index, :index
+  end
+
+  scope "/", RushWeb do
+    pipe_through :export
+
+    get "/export/csv", StatisticExportController, :export_csv
   end
 
   # Other scopes may use custom stacks.

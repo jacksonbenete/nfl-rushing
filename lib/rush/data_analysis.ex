@@ -10,6 +10,22 @@ defmodule Rush.DataAnalysis do
     data = Json.import_json_file(file)
   end
 
+  @doc """
+  This functions searches for a type in the provided json data.
+
+  ### Examples
+
+      iex> data = Rush.Json.import_json_file("test/test_data.json")
+      iex> Rush.DataAnalysis.find_type(data, &is_bitstring/1)
+      ["Lng", "Player", "Pos", "Team", "Yds"]
+
+  1. Transform the list of maps into a list of tuples using zip, each tuple is a collection of attributes
+  2. It's hard to iterate on tuples, so transform each tuple into a list, you'll have a list of lists
+  3. Filter each sublist to delete everything that isn't a bitstring
+  4. Remove the empty sublists
+  5. Keep the head of each sublist
+  6. Collect the name of each field that contains at least one bitstring as a value
+  """
   def find_type(data, type_function) do
     Enum.zip(data)
     |> Enum.map(fn x -> Tuple.to_list(x) end)
@@ -19,6 +35,19 @@ defmodule Rush.DataAnalysis do
     |> Enum.map(fn tuple -> elem(tuple, 0) end)
   end
 
+  @doc """
+  This function extracts a specific field from the entire lists.
+
+  ### Examples
+
+      iex(3)> Rush.DataAnalysis.explore_field(data, "Avg")
+      [{"Avg", {"Avg", 1}, {"Avg", 2}, {"Avg", 0.5}, ...]
+
+  1. Transform the list of maps into a list of tuples using zip, each tuple is a collection of attributes
+  2. It's hard to iterate on tuples, so transform each tuple into a list, you'll have a list of lists
+  3. Filter each sublist for the field provided
+  4. Remove the empty sublists
+  """
   def explore_field(data, field) do
     Enum.zip(data)
     |> Enum.map(fn x -> Tuple.to_list(x) end)

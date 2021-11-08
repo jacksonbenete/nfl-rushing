@@ -1,14 +1,14 @@
 defmodule Rush.Players.Contract do
-  @moduledoc false
+  @moduledoc """
+  This module implements an anti-corruption layer.
+  It validates and parses data from different sources (json, map, etc)
+  and maps it to a valid Player (Rush.Players.Player).
+  """
 
   alias Rush.Json
   alias Rush.Players.Player
   alias Rush.Statistics.PlayerStatistic
 
-  @doc """
-  This function applies the contract acting like an anti-corruption layer,
-  then it validates the player by parsing and validating the fields.
-  """
   def player_from_json(data) do
     data
     |> Json.json_to_map
@@ -81,6 +81,19 @@ defmodule Rush.Players.Contract do
   defp parse_longest_rush(%{"longest_rush" => longest_rush} = map) when is_integer(longest_rush) do
     map
     |> Map.put("longest_rush_is_touchdown", :false)
+  end
+
+  def recover_longest_rush_letter(%{longest_rush: longest_rush, longest_rush_is_touchdown: longest_rush_is_touchdown} = map) do
+    case longest_rush_is_touchdown do
+      true -> map |> Map.replace!(:longest_rush, "#{Integer.to_string(longest_rush)}T")
+      _ -> map |> Map.replace!(:longest_rush, Integer.to_string(longest_rush))
+    end
+  end
+  def recover_longest_rush_letter(longest_rush, longest_rush_is_touchdown) do
+    case longest_rush_is_touchdown do
+      true -> "#{Integer.to_string(longest_rush)}T"
+      _ -> Integer.to_string(longest_rush)
+    end
   end
 
   @doc """

@@ -1,5 +1,9 @@
 defmodule RushWeb.StatisticsPaginationComponent do
-  @moduledoc false
+  @moduledoc """
+  The pagination works using Scrivener.Ecto and uses the update/2 function
+  to receive the assigns given to the component and use the helper functions
+  to update the assigns with additional parameters for styling the buttons conditionally.
+  """
   use RushWeb, :live_component
 
   def update(assigns, socket) do
@@ -23,7 +27,7 @@ defmodule RushWeb.StatisticsPaginationComponent do
 
   defp get_previous_button_attrs(page, total_pages) do
     case page == 1 do
-      true -> %{disabled: "disabled cursor: default", css: "cursor: default", colour: "bg-gray-100"}
+      true -> %{disabled: "disabled", css: "cursor: default", colour: "bg-gray-100"}
       _ -> %{disabled: "", css: "", colour: "bg-blue-500 hover:bg-gray-400"}
     end
   end

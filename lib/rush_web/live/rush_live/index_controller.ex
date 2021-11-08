@@ -1,5 +1,8 @@
 defmodule RushWeb.RushLive.Controller do
-  @moduledoc false
+  @moduledoc """
+  This module is the LiveView "Controller", I've extracted all functions
+  required by mount/3, handle_params/3 and handle_events/3 on the live "View".
+  """
   use RushWeb, :live_view
 
   alias Rush

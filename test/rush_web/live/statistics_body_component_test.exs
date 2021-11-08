@@ -21,13 +21,13 @@ defmodule RushWeb.StatisticsBodyComponentTest do
       <td class="px-4 py-3 text-ms font-semibold border text-center text-red-500" headers="Lng"> #{valid_player.longest_rush} </td>
       <td class="px-4 py-3 text-ms font-semibold border text-center" headers="Att"> #{valid_player.attempts} </td>
       <td class="px-4 py-3 text-ms font-semibold border text-center" headers="Avg"> #{valid_player.average_yards_per_attempt} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="Att/G"> #{valid_player.attempts_per_game} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="Yds/G"> #{valid_player.yards_per_game} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="1st"> #{valid_player.total_first_downs} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="1st%"> #{valid_player.first_downs_percentage}% </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="20+"> #{valid_player.rush_20_plus} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="40+"> #{valid_player.rush_40_plus} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="Fum"> #{valid_player.fumbles} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="Att/G"> #{valid_player.attempts_per_game} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="Yds/G"> #{valid_player.yards_per_game} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="1st"> #{valid_player.total_first_downs} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="1st%"> #{valid_player.first_downs_percentage}% </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="20+"> #{valid_player.rush_20_plus} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="40+"> #{valid_player.rush_40_plus} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="Fum"> #{valid_player.fumbles} </td>
       """
     end
 
@@ -46,13 +46,13 @@ defmodule RushWeb.StatisticsBodyComponentTest do
       <td class="px-4 py-3 text-ms font-semibold border text-center " headers="Lng"> #{valid_player.longest_rush} </td>
       <td class="px-4 py-3 text-ms font-semibold border text-center" headers="Att"> #{valid_player.attempts} </td>
       <td class="px-4 py-3 text-ms font-semibold border text-center" headers="Avg"> #{valid_player.average_yards_per_attempt} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="Att/G"> #{valid_player.attempts_per_game} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="Yds/G"> #{valid_player.yards_per_game} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="1st"> #{valid_player.total_first_downs} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="1st%"> #{valid_player.first_downs_percentage}% </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="20+"> #{valid_player.rush_20_plus} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="40+"> #{valid_player.rush_40_plus} </td>
-      <td class="px-4 py-3 text-ms font-semibold border text-center" headers="Fum"> #{valid_player.fumbles} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="Att/G"> #{valid_player.attempts_per_game} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="Yds/G"> #{valid_player.yards_per_game} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="1st"> #{valid_player.total_first_downs} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="1st%"> #{valid_player.first_downs_percentage}% </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="20+"> #{valid_player.rush_20_plus} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="40+"> #{valid_player.rush_40_plus} </td>
+      <td class="px-4 py-3 text-ms font-semibold border text-center hidden sm:table-cell" headers="Fum"> #{valid_player.fumbles} </td>
       """
     end
 

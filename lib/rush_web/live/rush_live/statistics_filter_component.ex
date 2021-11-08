@@ -1,5 +1,11 @@
 defmodule RushWeb.StatisticsFilterComponent do
-  @moduledoc false
+  @moduledoc """
+  This module is here not only because we want to use a live component but
+  we need a changeset for our "fake" form.
+  The filter_player input works inside a form, so this changeset validates
+  the input received, such as filtering the query only if at least
+  three characters have been typed.
+  """
   use RushWeb, :live_component
 
   alias Ecto.Changeset

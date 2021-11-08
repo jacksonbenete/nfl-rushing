@@ -2,19 +2,20 @@
     <div class="p-2 w-full h-100"></div>
 </section>
 
-<section class="relative mx-auto pl-6">
-    <div class="grid grid-cols-3">
-        <%= live_component RushWeb.StatisticsFilterComponent, changeset: @changeset, id: "filter" %>
-        <div></div>
-        <div class="grid grid-cols-1 justify-items-end pr-6">
+<section class="relative mx-auto">
+    <div class="grid gap-2 grid-cols-1 sm:grid-cols-2">
+        <div class="grid grid-cols-1 justify-items-center sm:justify-items-start">
+            <%= live_component RushWeb.StatisticsFilterComponent, changeset: @changeset, id: "filter" %>
+        </div>
+        <div class="grid grid-cols-1 justify-items-center sm:justify-items-end">
             <%= live_component RushWeb.StatisticsPaginationComponent, page: @page, total_pages: @total_pages, id: "pagination" %>
         </div>
     </div>
 </section>
 
-<section class="block mx-auto p-6 font-mono">
-<div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-    <div class="w-full overflow-x-auto">
+<section class="block mx-auto pt-6 sm:pb-6 font-mono">
+<div class="w-full sm:mb-8 overflow-hidden rounded-lg shadow-lg">
+    <div class="w-full overflow-x-auto lg:overflow-x-hidden">
         <table class="w-full">
             <thead>
             <%= live_component RushWeb.StatisticsHeaderComponent, sort: %{sort: @sort, sort_order: @sort_order} %>
@@ -25,4 +26,10 @@
         </table>
     </div>
 </div>
+</section>
+
+<section class="block sm:hidden mx-auto pt-6 pb-12">
+    <div class="grid grid-cols-1 justify-items-center">
+        <%= live_component RushWeb.StatisticsDownloadComponent, url_params: @url_params %>
+    </div>
 </section>
