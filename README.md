@@ -88,7 +88,27 @@ to run the application without docker as well.
 I'll describe some of the design decisions and steps for creating this solution.
 It's kind verbose but I hope it will help.
 
-TL;DR It works.
+TL;DR It works and the table is cute.
+
+### About Design decisions
+
+I've taken some design decision that I'm not sure if it was a good idea, but since it's only a prototype,
+I think it is ok to experiment:
+
+On mobile, we start omitting table columns because horizontal scroll on mobile is a bit confusing (to me).
+I'm not familiar with Football, so I'm not sure which columns would be "more important" to keep so it was kind arbitrary.
+However if you turn the phone horizontally you'll have the entire table available, which is cool.
+This is something easy to undo though, it was just something I wondered would work. Let me know.
+
+Filter is strict by default, but you can enable fuzzy filtering. Try `?filter=fuzzy`.
+Fuzzy search can be quite forgiving but if not configured nicely it's buggy.
+The user might want to filter only by one letter... Fuzzy might find nothing depending on the algorithm configuration.
+
+I've found this table design searching about Tailwind tables. I liked it very much and stole it for us.
+I decided to keep the name, team and position in the same column, and I put this little boy picture as a placeholder.
+I thought it would be cool to show the Team logo or wordmark in the future,
+could be consuming an API or holding the images as assets. Alternatively we could use the players
+pictures as well.
 
 ### First Step
 I have decided to create a PlayerRegistrationController to act as an anti-corruption layer.
@@ -190,33 +210,21 @@ After a while I decided to refactor the code and I started using the LiveView ma
 Inside the live folder, you'll find a "index.ex", which is the Live`View` file, and a "index_controller.ex" where
 I extracted all the helper functions and logic that was not the handle_params/3 and handle_event/3 functions.
 
-Then I've created one live component for each needed component.
+Then I've created one live component for each needed dynamic or interactive component.
 The live component helps into testing the view, and it also helps organizing the code
 applying the single-responsibility principle, although you increase the number of files to handle.
 
 I wrote tests for each live component, and I've wrote some documentations.
 About this, not all code is documented, and the documentations was more about explaining how I organized the files
 and some design decisions as well.
-I've tried to write code as DRY as I could, and I've tried to create façades,
+I've tried to write code as DRY as I could, and I tried to create façades,
 small functions and utilize the MVC design pattern as much as I could as LiveView kinds of advocate the opposite.
 
 All events patches the url, so you can also manipulate params directly and share "state" to other users.
 The sorting isn't cumulative, if you sort Yds, you "order_by" Yds only.
-Filter is strict, it start filtering from the third typed character,
-but you can enable fuzzy filtering. Try `?filter=fuzzy`.
-
-I've found this table design searching about Tailwind tables. I liked it very much and stole it for us.
-I put this little boy picture as a placeholder from where I stole this "circle picture" code,
-I thought it would be cool to show the Team logo or wordmark in the future,
-could be consuming an API or holding the images as assets. Alternatively we could use the players
-pictures as well.
 
 The design is responsive, on a "small" and "medium" display the table will receive a scroll.
-Note that "small" isn't mobile.
-I've taken a design decision that I'm not sure if it was a good idea, but since it's only a prototype, I think it's ok:
-On mobile, which is a screen smaller than the Tailwind "small" attribute, we start omitting table columns.
-I'm not familiar with Football, so I'm not sure which columns would be "more important" so it was kind arbitrary.
-However if you turn the phone horizontally and you'll have the entire table available.
+Note that "small" isn't mobile for Tailwind.
 
 The front-end was tested on Safari, Firefox, Chrome and Chrome mobile (Android Phone).
 
