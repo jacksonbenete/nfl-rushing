@@ -15,7 +15,7 @@
 
 <section class="block mx-auto pt-6 sm:pb-6 font-mono">
 <div class="w-full sm:mb-8 overflow-hidden rounded-lg shadow-lg">
-    <div class="w-full overflow-x-auto">
+    <div class="w-full overflow-x-auto lg:overflow-x-hidden">
         <table class="w-full">
             <thead>
             <%= live_component RushWeb.StatisticsHeaderComponent, sort: %{sort: @sort, sort_order: @sort_order} %>

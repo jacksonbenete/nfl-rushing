@@ -16,13 +16,13 @@ defmodule RushWeb.StatisticsHeaderComponentTest do
       <th class="px-4 py-3 text-blue-600" style="cursor: pointer" id="Lng" phx-click="sort_statistics" phx-value-sort="longest_rush" phx-value-sort_order="asc">Lng\n\n</th>
       <th class="px-4 py-3" id="Att">Att</th>
       <th class="px-4 py-3" id="Avg">Avg</th>
-      <th class="px-4 py-3" id="Att/G">Att/G</th>
-      <th class="px-4 py-3" id="Yds/G">Yds/G</th>
-      <th class="px-4 py-3" id="1st">1st</th>
-      <th class="px-4 py-3" id="1st%">1st%</th>
-      <th class="px-4 py-3" id="20+">20+</th>
-      <th class="px-4 py-3" id="40+">40+</th>
-      <th class="px-4 py-3" id="Fum">Fum</th>
+      <th class="px-4 py-3 hidden sm:table-cell" id="Att/G">Att/G</th>
+      <th class="px-4 py-3 hidden sm:table-cell" id="Yds/G">Yds/G</th>
+      <th class="px-4 py-3 hidden sm:table-cell" id="1st">1st</th>
+      <th class="px-4 py-3 hidden sm:table-cell" id="1st%">1st%</th>
+      <th class="px-4 py-3 hidden sm:table-cell" id="20+">20+</th>
+      <th class="px-4 py-3 hidden sm:table-cell" id="40+">40+</th>
+      <th class="px-4 py-3 hidden sm:table-cell" id="Fum">Fum</th>
       </tr>
       """
 
@@ -41,13 +41,13 @@ defmodule RushWeb.StatisticsHeaderComponentTest do
         <th class="px-4 py-3 text-blue-600" style="cursor: pointer" id="Lng" phx-click="sort_statistics" phx-value-sort="longest_rush" phx-value-sort_order="asc">Lng\n\n</th>
         <th class="px-4 py-3" id="Att">Att</th>
         <th class="px-4 py-3" id="Avg">Avg</th>
-        <th class="px-4 py-3" id="Att/G">Att/G</th>
-        <th class="px-4 py-3" id="Yds/G">Yds/G</th>
-        <th class="px-4 py-3" id="1st">1st</th>
-        <th class="px-4 py-3" id="1st%">1st%</th>
-        <th class="px-4 py-3" id="20+">20+</th>
-        <th class="px-4 py-3" id="40+">40+</th>
-        <th class="px-4 py-3" id="Fum">Fum</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Att/G">Att/G</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Yds/G">Yds/G</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="1st">1st</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="1st%">1st%</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="20+">20+</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="40+">40+</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Fum">Fum</th>
         </tr>
         """
 
@@ -66,13 +66,13 @@ defmodule RushWeb.StatisticsHeaderComponentTest do
         <th class="px-4 py-3 text-blue-600" style="cursor: pointer" id="Lng" phx-click="sort_statistics" phx-value-sort="longest_rush" phx-value-sort_order="asc">Lng\n↓\n</th>
         <th class="px-4 py-3" id="Att">Att</th>
         <th class="px-4 py-3" id="Avg">Avg</th>
-        <th class="px-4 py-3" id="Att/G">Att/G</th>
-        <th class="px-4 py-3" id="Yds/G">Yds/G</th>
-        <th class="px-4 py-3" id="1st">1st</th>
-        <th class="px-4 py-3" id="1st%">1st%</th>
-        <th class="px-4 py-3" id="20+">20+</th>
-        <th class="px-4 py-3" id="40+">40+</th>
-        <th class="px-4 py-3" id="Fum">Fum</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Att/G">Att/G</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Yds/G">Yds/G</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="1st">1st</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="1st%">1st%</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="20+">20+</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="40+">40+</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Fum">Fum</th>
         </tr>
         """
 
@@ -93,13 +93,13 @@ defmodule RushWeb.StatisticsHeaderComponentTest do
         <th class="px-4 py-3 text-blue-600" style="cursor: pointer" id="Lng" phx-click="sort_statistics" phx-value-sort="longest_rush" phx-value-sort_order="desc">Lng\n\n</th>
         <th class="px-4 py-3" id="Att">Att</th>
         <th class="px-4 py-3" id="Avg">Avg</th>
-        <th class="px-4 py-3" id="Att/G">Att/G</th>
-        <th class="px-4 py-3" id="Yds/G">Yds/G</th>
-        <th class="px-4 py-3" id="1st">1st</th>
-        <th class="px-4 py-3" id="1st%">1st%</th>
-        <th class="px-4 py-3" id="20+">20+</th>
-        <th class="px-4 py-3" id="40+">40+</th>
-        <th class="px-4 py-3" id="Fum">Fum</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Att/G">Att/G</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Yds/G">Yds/G</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="1st">1st</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="1st%">1st%</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="20+">20+</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="40+">40+</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Fum">Fum</th>
         </tr>
         """
 
@@ -118,13 +118,13 @@ defmodule RushWeb.StatisticsHeaderComponentTest do
         <th class="px-4 py-3 text-blue-600" style="cursor: pointer" id="Lng" phx-click="sort_statistics" phx-value-sort="longest_rush" phx-value-sort_order="desc">Lng\n\n</th>
         <th class="px-4 py-3" id="Att">Att</th>
         <th class="px-4 py-3" id="Avg">Avg</th>
-        <th class="px-4 py-3" id="Att/G">Att/G</th>
-        <th class="px-4 py-3" id="Yds/G">Yds/G</th>
-        <th class="px-4 py-3" id="1st">1st</th>
-        <th class="px-4 py-3" id="1st%">1st%</th>
-        <th class="px-4 py-3" id="20+">20+</th>
-        <th class="px-4 py-3" id="40+">40+</th>
-        <th class="px-4 py-3" id="Fum">Fum</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Att/G">Att/G</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Yds/G">Yds/G</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="1st">1st</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="1st%">1st%</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="20+">20+</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="40+">40+</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Fum">Fum</th>
         </tr>
         """
 
@@ -143,13 +143,13 @@ defmodule RushWeb.StatisticsHeaderComponentTest do
         <th class="px-4 py-3 text-blue-600" style="cursor: pointer" id="Lng" phx-click="sort_statistics" phx-value-sort="longest_rush" phx-value-sort_order="desc">Lng\n↑\n</th>
         <th class="px-4 py-3" id="Att">Att</th>
         <th class="px-4 py-3" id="Avg">Avg</th>
-        <th class="px-4 py-3" id="Att/G">Att/G</th>
-        <th class="px-4 py-3" id="Yds/G">Yds/G</th>
-        <th class="px-4 py-3" id="1st">1st</th>
-        <th class="px-4 py-3" id="1st%">1st%</th>
-        <th class="px-4 py-3" id="20+">20+</th>
-        <th class="px-4 py-3" id="40+">40+</th>
-        <th class="px-4 py-3" id="Fum">Fum</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Att/G">Att/G</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Yds/G">Yds/G</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="1st">1st</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="1st%">1st%</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="20+">20+</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="40+">40+</th>
+        <th class="px-4 py-3 hidden sm:table-cell" id="Fum">Fum</th>
         </tr>
         """
 

@@ -82,7 +82,7 @@ defmodule RushWeb.StatisticExportController do
         player.average_yards_per_attempt,
         player.yards_per_game,
         player.total_touchdowns,
-        Contract.recover_longest_rush_T(player.longest_rush, player.longest_rush_is_touchdown),
+        Contract.recover_longest_rush_letter(player.longest_rush, player.longest_rush_is_touchdown),
         player.total_first_downs,
         player.first_downs_percentage,
         player.rush_20_plus,

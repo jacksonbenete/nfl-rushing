@@ -1,5 +1,4 @@
 defmodule RushWeb.StatisticsDownloadComponent do
-  @moduledoc """
-  """
+  @moduledoc false
   use RushWeb, :live_component
 end

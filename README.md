@@ -58,6 +58,16 @@ If you have any questions regarding requirements, do not hesitate to email your 
 
 ## A brief discussion about the solution
 
+Note: I didn't used Docker for this project because I just started using a macbook, and for some reason
+I'm having problems to setup docker with phoenix on macbook. I'm sorry for that.
+Phoenix 1.6 is easier to setup locally since it's not using node_modules, so at least it should be straightforward
+to run the application without docker as well.
+
+I'll describe some of the design decisions and steps for creating this solution.
+It's kind verbose but I hope it will help.
+
+TL;DR It works.
+
 ### First Step
 I have decided to create a PlayerRegistrationController to act as an anti-corruption layer.
 That's because I'm not familiar with Football, so reading "Lng", "TD" and "Att/G" was a bit obscure.
@@ -67,7 +77,7 @@ I also have included an extra attribute which is "longest_rush_is_touchdown", so
 and turn the Lng field into an integer for easier sorting later.
 
 I did a process of data validation to analyse the provided data to see if any other fields
-could have a bitstring where a numeric value was expected.
+would have a bitstring where a numeric value was expected.
 
 To extract all fields that have at least one value as bitstring, do:
 
@@ -158,24 +168,43 @@ After a while I decided to refactor the code and I started using the LiveView ma
 Inside the live folder, you'll find a "index.ex", which is the Live`View` file, and a "index_controller.ex" where
 I extracted all the helper functions and logic that was not the handle_params/3 and handle_event/3 functions.
 
-Then I created one live component for each needed component.
+Then I've created one live component for each needed component.
 The live component helps into testing the view, and it also helps organizing the code
-applying the single-responsibility principle.
+applying the single-responsibility principle, although you increase the number of files to handle.
 
 I wrote tests for each live component, and I've wrote some documentations.
-About this, not all code is documented, and the documentations was more about explaining how I organized the files.
+About this, not all code is documented, and the documentations was more about explaining how I organized the files
+and some design decisions as well.
 I've tried to write code as DRY as I could, and I've tried to create façades,
 small functions and utilize the MVC design pattern as much as I could as LiveView kinds of advocate the opposite.
 
 All events patches the url, so you can also manipulate params directly and share "state" to other users.
-The sorting isn't cumulative, if you sort Yds, you order_by Yds.
+The sorting isn't cumulative, if you sort Yds, you "order_by" Yds only.
 Filter is strict, it start filtering from the third typed character,
 but you can enable fuzzy filtering. Try `?filter=fuzzy`.
 
 I've found this table design searching about Tailwind tables. I liked it very much and stole it for us.
-I put this little boy picture as a placeholder, I thought it would be cool to show the Team logo or wordmark
-in the future, could be consuming an API or holding the images as assets. Alternatively we could use the players
+I put this little boy picture as a placeholder from where I stole this "circle picture" code,
+I thought it would be cool to show the Team logo or wordmark in the future,
+could be consuming an API or holding the images as assets. Alternatively we could use the players
 pictures as well.
 
-The design is responsive, on a medium display the table will receive a scroll, on a small display we start
-omitting columns to fit.
+The design is responsive, on a "small" and "medium" display the table will receive a scroll.
+Note that "small" isn't mobile.
+I've taken a design decision that I'm not sure if it was a good idea, but since it's only a prototype, I think it's ok:
+On mobile, which is a screen smaller than the Tailwind "small" attribute, we start omitting table columns.
+I'm not familiar with Football, so I'm not sure which columns would be "more important" so it was kind arbitrary.
+However if you turn the phone horizontally and you'll have the entire table available.
+
+The front-end was tested on Safari, Firefox, Chrome and Chrome mobile (Android Phone).
+
+### Third Step
+
+After losing some time trying to discover the best approach to handle a file to the user with LiveView,
+I decided to use a link and establish a GET route.
+
+I created three possible ways of handling the file, but used only one.
+The other two are available in the controller with some comments (and ideas about using them).
+
+The download function was tested on all three major browsers as well as Android, it works sending the user to do a get request
+passing the parameters (filters, sort orders) in a new tab, so LiveView will not lose connection.
